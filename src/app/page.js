@@ -5,9 +5,15 @@ import TaskList from "@/components/TaskList";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [tasks, setTasks] = useState([{ text: "", done: false }]);
+  const [tasks, setTasks] = useState([]);
   const [input, setInput] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("work");
+
+  const categories = [
+    { name: "work", color: "bg-[#dad9fb] text-[#464596]" },
+    { name: "personal", color: "bg-[#cfff56] text-[#587709]" },
+    { name: "urgent", color: "bg-red-100 text-red-700" },
+  ];
 
   const addTask = () => {
     if (!input) return;
@@ -17,7 +23,7 @@ export default function Home() {
     ];
     setTasks(taskList);
     setInput("");
-    setCategory("");
+    setCategory("work");
     console.log(taskList);
   };
 
@@ -48,7 +54,12 @@ export default function Home() {
     <div className="w-full h-[100vh] flex justify-center p-5 ">
       <div className="relative max-w-[600px] w-full h-full">
         <div className="w-full flex flex-col gap-4 items-center ">
-          <h1 className="text-gray-700 text-2xl font-bold">Task Manager</h1>
+          <div className="flex justify-between w-full">
+            <h1 className="text-gray-700 text-2xl font-bold">Task Manager</h1>
+            <div>
+              Your remaining tasks: {tasks.filter((t) => !t.done).length}
+            </div>
+          </div>
 
           <TaskInput
             input={input}
@@ -56,6 +67,7 @@ export default function Home() {
             addTask={addTask}
             category={category}
             setCategory={setCategory}
+            categories={categories}
           />
 
           <TaskList

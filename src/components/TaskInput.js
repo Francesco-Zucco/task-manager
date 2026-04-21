@@ -9,7 +9,15 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
-const TaskInput = ({ input, setInput, addTask, category, setCategory }) => {
+import { VisuallyHidden } from "radix-ui";
+const TaskInput = ({
+  input,
+  setInput,
+  addTask,
+  category,
+  setCategory,
+  categories,
+}) => {
   return (
     <Drawer>
       <DrawerTrigger className="absolute bottom-6 right-6 bg-[#cfff56] text-xl px-5 py-5 rounded-xl">
@@ -28,7 +36,7 @@ const TaskInput = ({ input, setInput, addTask, category, setCategory }) => {
           />
         </svg>
       </DrawerTrigger>
-      <DrawerContent>
+      <DrawerContent aria-describedby={undefined}>
         <div className="max-w-md mx-auto w-full px-10 pb-10 flex flex-col gap-6">
           {/* TITLE */}
           <div>
@@ -39,8 +47,6 @@ const TaskInput = ({ input, setInput, addTask, category, setCategory }) => {
               Create a task and optionally add a category
             </p>
           </div>
-
-          {/* INPUT TASK */}
           <div className="flex flex-col gap-1">
             <input
               autoFocus
@@ -60,27 +66,17 @@ const TaskInput = ({ input, setInput, addTask, category, setCategory }) => {
         "
             />
           </div>
-
-          {/* INPUT CATEGORY */}
-          <div className="flex flex-col gap-1">
-            <input
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              placeholder="Category (optional)"
-              className="
-          w-full
-          bg-transparent
-          outline-none
-          text-gray-900
-          placeholder-gray-400
-          border-b border-gray-300
-          py-2
-          focus:border-gray-500
-          transition-all duration-300
-        "
-            />
+          <div className="flex gap-2 ">
+            {categories.map((cat) => (
+              <button
+                key={cat.name}
+                onClick={() => setCategory(cat.name)}
+                className={`px-3 py-1 rounded-full text-sm transition ${cat.color} ${category === cat.name ? "ring-1 ring-gray-400" : "opacity-70"} `}
+              >
+                <p>{cat.name}</p>
+              </button>
+            ))}
           </div>
-
           {/* BUTTON */}
           <DrawerClose asChild>
             <Button

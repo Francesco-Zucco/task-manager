@@ -1,12 +1,12 @@
 const TaskItem = ({ task, i, toggleDone, deleteTask }) => {
   return (
     <div
+      className="flex border p-3 rounded-xl flex gap-2 items-center justify-between"
       style={{
         color: task.done ? "green" : "black",
         textDecoration: task.done ? "line-through" : "none",
       }}
     >
-      {task.text}{" "}
       <button onClick={() => toggleDone(i)}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -23,6 +23,8 @@ const TaskItem = ({ task, i, toggleDone, deleteTask }) => {
           />
         </svg>
       </button>
+      <p>{task.text}</p>
+      <div>{task.category}</div>
       <button className="text-black" onClick={() => deleteTask(i)}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
