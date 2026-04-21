@@ -1,4 +1,6 @@
 "use client";
+import TaskItem from "@/components/TaskItem";
+import TaskList from "@/components/TaskList";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -55,20 +57,11 @@ export default function Home() {
             </div>
           </nav>
 
-          <ul>
-            {tasks.map((task, i) => (
-              <li
-                style={{
-                  color: task.done ? "green" : "black",
-                  textDecoration: task.done ? "line-through" : "none",
-                }}
-                key={i}
-              >
-                {task.text} <button onClick={() => toggleDone(i)}>✅</button>
-                <button onClick={() => deleteTask(i)}>x</button>
-              </li>
-            ))}
-          </ul>
+          <TaskList
+            tasks={tasks}
+            toggleDone={toggleDone}
+            deleteTask={deleteTask}
+          />
         </div>
       </div>
     </div>
