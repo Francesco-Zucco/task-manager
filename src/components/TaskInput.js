@@ -1,0 +1,108 @@
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+import { Button } from "@/components/ui/button";
+const TaskInput = ({ input, setInput, addTask, category, setCategory }) => {
+  return (
+    <Drawer>
+      <DrawerTrigger className="absolute bottom-6 right-6 bg-[#cfff56] text-xl px-5 py-5 rounded-xl">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="size-8"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M12 4.5v15m7.5-7.5h-15"
+          />
+        </svg>
+      </DrawerTrigger>
+      <DrawerContent>
+        <div className="max-w-md mx-auto w-full px-10 pb-10 flex flex-col gap-6">
+          {/* TITLE */}
+          <div>
+            <h2 className="text-lg font-semibold text-gray-900">
+              Add new task
+            </h2>
+            <p className="text-sm text-gray-600">
+              Create a task and optionally add a category
+            </p>
+          </div>
+
+          {/* INPUT TASK */}
+          <div className="flex flex-col gap-1">
+            <input
+              autoFocus
+              placeholder="Task title..."
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              className="
+          w-full
+          bg-transparent
+          outline-none
+          text-gray-900
+          placeholder-gray-400
+          border-b border-gray-300
+          py-2
+          focus:border-gray-500
+          transition-all duration-300
+        "
+            />
+          </div>
+
+          {/* INPUT CATEGORY */}
+          <div className="flex flex-col gap-1">
+            <input
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              placeholder="Category (optional)"
+              className="
+          w-full
+          bg-transparent
+          outline-none
+          text-gray-900
+          placeholder-gray-400
+          border-b border-gray-300
+          py-2
+          focus:border-gray-500
+          transition-all duration-300
+        "
+            />
+          </div>
+
+          {/* BUTTON */}
+          <DrawerClose asChild>
+            <Button
+              onClick={addTask}
+              className="
+          w-full
+          bg-[#cfff56]
+          text-black
+          rounded-xl
+          py-7
+          
+          hover:brightness-95
+          transition
+        "
+            >
+              Add Task
+            </Button>
+          </DrawerClose>
+        </div>
+      </DrawerContent>
+    </Drawer>
+  );
+};
+
+export default TaskInput;

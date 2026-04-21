@@ -1,4 +1,5 @@
 "use client";
+import TaskInput from "@/components/TaskInput";
 import TaskItem from "@/components/TaskItem";
 import TaskList from "@/components/TaskList";
 import { useEffect, useState } from "react";
@@ -6,12 +7,20 @@ import { useEffect, useState } from "react";
 export default function Home() {
   const [tasks, setTasks] = useState([{ text: "", done: false }]);
   const [input, setInput] = useState("");
+  const [category, setCategory] = useState("");
 
   const addTask = () => {
     if (!input) return;
-    setTasks([...tasks, { text: input, done: false }]);
+    const taskList = [
+      ...tasks,
+      { text: input, done: false, category: category || "general" },
+    ];
+    setTasks(taskList);
     setInput("");
+    setCategory("");
+    console.log(taskList);
   };
+
   const deleteTask = (index) => {
     setTasks(tasks.filter((_, i) => i !== index));
   };
@@ -36,26 +45,18 @@ export default function Home() {
   }, [tasks]);
 
   return (
-    <div className="w-full flex items-center justify-center p-4">
-      <div className="max-w-[1024px] w-full">
-        <div className="w-full">
-          <nav className="w-full flex justify-between">
-            <h1>Task Manager</h1>
-            <div className="flex flex-row gap-2">
-              <input
-                className=" px-4 py-3 rounded-full border border-gray-300 focus:outline-none  focus:shadow-md transition shadow-sm
-  "
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-              />
-              <button
-                className="bg-[#cfff56] px-4 py-2 rounded-full"
-                onClick={addTask}
-              >
-                Add Task
-              </button>
-            </div>
-          </nav>
+    <div className="w-full h-[100vh] flex justify-center p-5 ">
+      <div className="relative max-w-[600px] w-full h-full">
+        <div className="w-full flex flex-col gap-4 items-center ">
+          <h1 className="text-gray-700 text-2xl font-bold">Task Manager</h1>
+
+          <TaskInput
+            input={input}
+            setInput={setInput}
+            addTask={addTask}
+            category={category}
+            setCategory={setCategory}
+          />
 
           <TaskList
             tasks={tasks}
