@@ -8,6 +8,7 @@ export default function Home() {
   const [input, setInput] = useState("");
   const [category, setCategory] = useState("work");
   const [filterCategory, setFilterCategory] = useState("all");
+  const [statusFilter, setStatusFilter] = useState("all");
 
   const categories = [
     { name: "work", color: "bg-[#dad9fb] text-[#464596]" },
@@ -22,27 +23,38 @@ export default function Home() {
     { name: "urgent" },
   ];
 
+  const statusFilterOptions = [
+    { name: "all" },
+    { name: "completed" },
+    { name: "remaining" },
+  ];
+
   const addTask = () => {
     if (!input) return;
 
     const taskList = [
       ...tasks,
-      { text: input, done: false, category: category || "general" },
+      {
+        text: input,
+        done: false,
+        category: category,
+        id: Date.now().toString() || "general",
+      },
     ];
-
+    console.log(taskList);
     setTasks(taskList);
     setInput("");
     setCategory("work");
   };
 
-  const deleteTask = (index) => {
-    setTasks(tasks.filter((_, i) => i !== index));
+  const deleteTask = (id) => {
+    setTasks(tasks.filter((task) => task.id !== id));
   };
 
-  const toggleDone = (index) => {
+  const toggleDone = (id) => {
     setTasks(
-      tasks.map((task, i) =>
-        i === index ? { ...task, done: !task.done } : task,
+      tasks.map((task) =>
+        task.id === id ? { ...task, done: !task.done } : task,
       ),
     );
   };
@@ -52,6 +64,13 @@ export default function Home() {
       ? tasks
       : tasks.filter((t) => t.category === filterCategory);
 
+  const finalFilteredTasks =
+    statusFilter === "all"
+      ? filteredTasks
+      : statusFilter === "completed"
+        ? filteredTasks.filter((t) => t.done)
+        : filteredTasks.filter((t) => !t.done);
+
   const deleteAllTasks = () => {
     setTasks([]);
   };
@@ -60,11 +79,11 @@ export default function Home() {
 
   let message = "";
   if (tasks.length === 0) {
-    message = "Life with no goals is boring";
+    message = "No tasks, no progress";
   } else if (remainingTasks === 0) {
-    message = "all goals completed!";
+    message = "All tasks completed!";
   } else {
-    message = `remaining goals: ${remainingTasks}`;
+    message = `Remaining tasks: ${remainingTasks}`;
   }
 
   useEffect(() => {
@@ -89,35 +108,59 @@ export default function Home() {
           </div>
 
           <div className="w-full flex justify-between items-center px-2 pb-2">
-            <p className="text-sm text-gray-500 font-medium pl-2">
+            <p className=" text-gray-500 font-medium pl-2">
               Filter by category:
-            </p>{" "}
-            <p className="text-gray-500 pr-2">{message}</p>
+            </p>
+            <p className="text-gray-500 text-sm font-medium pr-2">{message}</p>
           </div>
 
           <div className="w-full flex justify-between px-2 pb-2">
-            <div className="flex w-full justify-between bg-gray-100 rounded-[20px] p-2 shadow-sm">
-              <div className="flex gap-1">
-                {filterOptions.map((f) => (
-                  <button
-                    key={f.name}
-                    className={`px-3 py-1.5 text-sm font-medium shadow-xs rounded-lg transition-all duration-150 cursor-pointer ${
-                      filterCategory === f.name
-                        ? "bg-[#cfff56] text-[#1f2937] border border-[#cfff56] hover:bg-[#b8e84d] active:scale-95 active:shadow-inner"
-                        : "text-gray-500 border border-gray-200 hover:bg-gray-50 hover:border-gray-300 active:scale-95 active:bg-gray-100"
-                    }`}
-                    onClick={() => setFilterCategory(f.name)}
-                  >
-                    {f.name}
-                  </button>
-                ))}
+            <div className="flex w-full justify-between rounded-[20px] p-2 ">
+              <div className="flex flex-col gap-1">
+                <div className="flex gap-1">
+                  {filterOptions.map((f) => (
+                    <button
+                      key={f.name}
+                      className={`px-3 py-1.5 text-sm font-medium shadow-xs rounded-lg transition-all duration-150 cursor-pointer ${
+                        filterCategory === f.name
+                          ? "bg-[#cfff56] text-[#1f2937] border border-[#cfff56] hover:bg-[#b8e84d] active:scale-95 active:shadow-inner"
+                          : "text-gray-500 border border-gray-200 hover:bg-gray-50 hover:border-gray-300 active:scale-95 active:bg-gray-100"
+                      }`}
+                      onClick={() => setFilterCategory(f.name)}
+                    >
+                      {f.name}
+                    </button>
+                  ))}
+                </div>
+                <div className="flex flex-col gap-1">
+                  <p className=" text-gray-500 font-medium pl-2">
+                    Filter by status:
+                  </p>
+                  <div>
+                    {statusFilterOptions.map((f) => (
+                      <button
+                        className={`px-3 py-1.5 text-sm font-medium shadow-xs rounded-lg transition-all duration-150 cursor-pointer ${
+                          statusFilter === f.name
+                            ? "bg-[#cfff56] text-[#1f2937] border border-[#cfff56] hover:bg-[#b8e84d] active:scale-95 active:shadow-inner"
+                            : "text-gray-500 border border-gray-200 hover:bg-gray-50 hover:border-gray-300 active:scale-95 active:bg-gray-100"
+                        }`}
+                        key={f.name}
+                        onClick={() => setStatusFilter(f.name)}
+                      >
+                        {f.name}
+                      </button>
+                    ))}
+                  </div>
+                </div>
               </div>
-              <button
-                className="px-3 shadow-sm hover:shadow-md rounded-lg cursor-pointer text-sm font-medium text-red-500 border border-red-200 rounded-[20px] hover:bg-red-50 hover:border-red-300 active:scale-95 active:bg-red-100 transition-all duration-150"
-                onClick={deleteAllTasks}
-              >
-                Delete all
-              </button>
+              <div>
+                <button
+                  className="px-3 shadow-sm hover:shadow-md rounded-lg cursor-pointer text-sm font-medium text-red-500 border border-red-200 rounded-[20px] hover:bg-red-50 hover:border-red-300 active:scale-95 active:bg-red-100 transition-all duration-150"
+                  onClick={deleteAllTasks}
+                >
+                  Delete all
+                </button>
+              </div>
             </div>
           </div>
 
@@ -142,7 +185,7 @@ export default function Home() {
               </div>
             ) : (
               <TaskList
-                tasks={filteredTasks}
+                tasks={finalFilteredTasks}
                 toggleDone={toggleDone}
                 deleteTask={deleteTask}
                 categories={categories}

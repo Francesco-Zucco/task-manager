@@ -5,11 +5,11 @@ const TaskList = ({ tasks, toggleDone, deleteTask, categories }) => {
     <ul className="w-full flex flex-col gap-2 h-full overflow-y-auto no-scrollbar pb-24 px-2">
       {tasks.map((task, i) => (
         <TaskItem
-          key={i}
+          key={task.id}
           i={i}
           task={task}
-          toggleDone={() => toggleDone(i)}
-          deleteTask={() => deleteTask(i)}
+          toggleDone={() => toggleDone(task.id)}
+          deleteTask={() => deleteTask(task.id)}
           categories={categories}
           category={categories.find((c) => c.name === task.category)}
         ></TaskItem>

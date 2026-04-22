@@ -9,7 +9,6 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
-import { VisuallyHidden } from "radix-ui";
 const TaskInput = ({
   input,
   setInput,
@@ -40,9 +39,9 @@ const TaskInput = ({
         <div className="max-w-md mx-auto w-full px-10 pb-10 flex flex-col gap-6">
           {/* TITLE */}
           <div>
-            <h2 className="text-lg font-semibold text-gray-800">
+            <DrawerTitle className="text-lg font-semibold text-gray-800">
               Add new task
-            </h2>
+            </DrawerTitle>
             <p className="text-sm text-gray-600">
               Create a task and add a category.
             </p>
@@ -52,6 +51,11 @@ const TaskInput = ({
               autoFocus
               placeholder="Task title..."
               value={input}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  addTask();
+                }
+              }}
               onChange={(e) => setInput(e.target.value)}
               className=" w-full bg-transparent outline-none text-gray-900 placeholder-gray-400 border-b border-gray-300 py-2 focus:border-gray-500 transition-all duration-300"
             />
@@ -61,7 +65,7 @@ const TaskInput = ({
               <button
                 key={cat.name}
                 onClick={() => setCategory(cat.name)}
-                className={`px-3 py-1 rounded-full text-sm transition ${cat.color} ${category === cat.name ? "ring-1 ring-gray-400" : "opacity-70"}`}
+                className={`px-3 py-1 rounded-full text-sm transition ${cat.color} ${category === cat.name ? "ring-2 ring-gray-400" : "opacity-70"}`}
               >
                 <p>{cat.name}</p>
               </button>

@@ -9,7 +9,7 @@ const TaskItem = ({
   return (
     <div className="flex border p-3 rounded-[20px] shadow-sm flex gap-2 items-center hover:shadow-md hover:border-gray-300 transition hover:scale-[1.01] duration-250 justify-between w-full">
       <div className="flex items-center gap-2">
-        <button onClick={() => toggleDone(i)}>
+        <button onClick={() => toggleDone(task.id)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -47,7 +47,7 @@ const TaskItem = ({
         </p>
         <button
           className="text-gray-800 cursor-pointer active:scale-95 transition"
-          onClick={() => deleteTask(i)}
+          onClick={() => deleteTask(task.id)}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
