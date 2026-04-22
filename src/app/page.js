@@ -39,6 +39,17 @@ export default function Home() {
     );
   };
 
+  const remainingTasks = tasks.filter((t) => !t.done).length;
+
+  let message = "";
+  if (tasks.length === 0) {
+    message = "Life with no goals is boring";
+  } else if (remainingTasks === 0) {
+    message = "all goals completed!";
+  } else {
+    message = `our remaining goals: ${remainingTasks}`;
+  }
+
   useEffect(() => {
     const saved = localStorage.getItem("tasks");
     if (saved) {
@@ -54,11 +65,11 @@ export default function Home() {
     <div className="w-full h-[100vh] flex justify-center p-5 ">
       <div className="relative max-w-[600px] w-full h-full">
         <div className="w-full flex flex-col gap-4 items-center ">
-          <div className="flex justify-between w-full">
-            <h1 className="text-gray-700 text-2xl font-bold">Task Manager</h1>
-            <div>
-              Your remaining tasks: {tasks.filter((t) => !t.done).length}
-            </div>
+          <div className="flex justify-between items-center w-full">
+            <h1 className="text-gray-700 text-2xl font-extrabold">
+              Task Manager
+            </h1>
+            <p className="text-gray-500">{message}</p>
           </div>
 
           <TaskInput
@@ -74,6 +85,7 @@ export default function Home() {
             tasks={tasks}
             toggleDone={toggleDone}
             deleteTask={deleteTask}
+            categories={categories}
           />
         </div>
       </div>

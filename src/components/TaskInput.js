@@ -53,17 +53,7 @@ const TaskInput = ({
               placeholder="Task title..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              className="
-          w-full
-          bg-transparent
-          outline-none
-          text-gray-900
-          placeholder-gray-400
-          border-b border-gray-300
-          py-2
-          focus:border-gray-500
-          transition-all duration-300
-        "
+              className=" w-full bg-transparent outline-none text-gray-900 placeholder-gray-400 border-b border-gray-300 py-2 focus:border-gray-500 transition-all duration-300"
             />
           </div>
           <div className="flex gap-2 ">
@@ -71,7 +61,7 @@ const TaskInput = ({
               <button
                 key={cat.name}
                 onClick={() => setCategory(cat.name)}
-                className={`px-3 py-1 rounded-full text-sm transition ${cat.color} ${category === cat.name ? "ring-1 ring-gray-400" : "opacity-70"} `}
+                className={`px-3 py-1 rounded-full text-sm transition ${cat.color} ${category === cat.name ? "ring-1 ring-gray-400" : "opacity-70"}`}
               >
                 <p>{cat.name}</p>
               </button>
@@ -81,16 +71,7 @@ const TaskInput = ({
           <DrawerClose asChild>
             <Button
               onClick={addTask}
-              className="
-          w-full
-          bg-[#cfff56]
-          text-black
-          rounded-xl
-          py-7
-          
-          hover:brightness-95
-          transition
-        "
+              className=" w-full bg-[#cfff56] text-black rounded-xl py-7 hover:brightness-95 transition"
             >
               Add Task
             </Button>
