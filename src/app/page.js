@@ -41,7 +41,6 @@ export default function Home() {
         id: Date.now().toString() || "general",
       },
     ];
-    console.log(taskList);
     setTasks(taskList);
     setInput("");
     setCategory("work");
