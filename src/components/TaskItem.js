@@ -7,7 +7,7 @@ const TaskItem = ({
   category,
 }) => {
   return (
-    <div className="flex border p-3 rounded-xl flex gap-2 items-center justify-between w-full">
+    <div className="flex border p-3 rounded-[20px] shadow-sm flex gap-2 items-center hover:shadow-md hover:border-gray-300 transition hover:scale-[1.01] duration-250 justify-between w-full">
       <div className="flex items-center gap-2">
         <button onClick={() => toggleDone(i)}>
           <svg
@@ -16,7 +16,11 @@ const TaskItem = ({
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className={`size-6 border rounded-md p-1 ${task.done ? "bg-green-500 border-green-300 text-green-900" : "border-gray-400"}`}
+            className={`size-6 border cursor-pointer rounded-lg transition-all duration-150 p-1 ${
+              task.done
+                ? "bg-emerald-500 border-emerald-500 text-white"
+                : "border-gray-400"
+            }`}
           >
             {task.done ? (
               <path
@@ -30,25 +34,26 @@ const TaskItem = ({
           </svg>
         </button>
         <p
-          style={{
-            textDecoration: task.done ? "line-through" : "none",
-          }}
+          className={`text-gray-800 ${task.done ? "line-through opacity-60" : ""} text-wrap `}
         >
           {task.text}
         </p>
       </div>
       <div className="flex items-center gap-2">
         <p
-          className={`px-3 py-1 rounded-full text-sm transition ${category.color} `}
+          className={`px-2 py-0.5 rounded-full text-xs transition ${category.color} `}
         >
           {task.category}
         </p>
-        <button className="text-black" onClick={() => deleteTask(i)}>
+        <button
+          className="text-gray-800 cursor-pointer active:scale-95 transition"
+          onClick={() => deleteTask(i)}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="currentColor"
-            className="size-6"
+            className="size-7"
           >
             <path
               fillRule="evenodd"

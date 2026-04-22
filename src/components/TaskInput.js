@@ -20,7 +20,7 @@ const TaskInput = ({
 }) => {
   return (
     <Drawer>
-      <DrawerTrigger className="absolute bottom-6 right-6 bg-[#cfff56] text-xl px-5 py-5 rounded-xl">
+      <DrawerTrigger className="absolute z-2 bottom-3 right-3 bg-[#cfff56] text-xl px-5 py-5 rounded-xl shadow-lg  transition ">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -40,11 +40,11 @@ const TaskInput = ({
         <div className="max-w-md mx-auto w-full px-10 pb-10 flex flex-col gap-6">
           {/* TITLE */}
           <div>
-            <h2 className="text-lg font-semibold text-gray-900">
+            <h2 className="text-lg font-semibold text-gray-800">
               Add new task
             </h2>
             <p className="text-sm text-gray-600">
-              Create a task and optionally add a category
+              Create a task and add a category.
             </p>
           </div>
           <div className="flex flex-col gap-1">
