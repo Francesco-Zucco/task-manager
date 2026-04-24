@@ -57,7 +57,7 @@ const TaskInput = ({
                 }
               }}
               onChange={(e) => setInput(e.target.value)}
-              className=" w-full bg-transparent outline-none text-gray-900 placeholder-gray-400 border-b border-gray-300 py-2 focus:border-gray-500 transition-all duration-300"
+              className=" w-full text-base bg-transparent outline-none text-gray-900 placeholder-gray-400 border-b border-gray-300 py-2 focus:border-gray-500 transition-all duration-300"
             />
           </div>
           <div className="flex gap-2 ">
