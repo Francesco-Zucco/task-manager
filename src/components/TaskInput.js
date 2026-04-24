@@ -1,3 +1,4 @@
+"use client";
 import {
   Drawer,
   DrawerClose,
@@ -9,6 +10,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
 const TaskInput = ({
   input,
   setInput,
@@ -17,8 +19,9 @@ const TaskInput = ({
   setCategory,
   categories,
 }) => {
+  const [open, setOpen] = useState(false);
   return (
-    <Drawer>
+    <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger className="absolute z-2 bottom-3 right-3 bg-[#cfff56] text-xl px-5 py-5 rounded-xl shadow-lg  transition ">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -54,6 +57,7 @@ const TaskInput = ({
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   addTask();
+                  setOpen(false);
                 }
               }}
               onChange={(e) => setInput(e.target.value)}
