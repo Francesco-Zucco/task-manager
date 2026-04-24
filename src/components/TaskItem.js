@@ -19,7 +19,7 @@ const TaskItem = ({
             className={`size-6 border cursor-pointer rounded-lg transition-all duration-150 p-1 ${
               task.done
                 ? "bg-emerald-500 border-emerald-500 text-white"
-                : "border-gray-400"
+                : "border-gray-400 text-white"
             }`}
           >
             {task.done ? (

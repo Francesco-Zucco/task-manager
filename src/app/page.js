@@ -135,7 +135,7 @@ export default function Home() {
                   <p className=" text-gray-500 font-medium pl-2">
                     Filter by status:
                   </p>
-                  <div>
+                  <div className="flex gap-1">
                     {statusFilterOptions.map((f) => (
                       <button
                         className={`px-3 py-1.5 text-sm font-medium shadow-xs rounded-lg transition-all duration-150 cursor-pointer ${

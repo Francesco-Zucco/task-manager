@@ -24,4 +24,4 @@ npm run dev
 
 ## Live
 
-currently not available (vercel not working for me)
+https://task-manager-francesco.netlify.app
