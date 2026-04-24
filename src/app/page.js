@@ -97,8 +97,8 @@ export default function Home() {
   }, [tasks]);
 
   return (
-    <div className="w-full h-screen flex justify-center  overflow-hidden">
-      <div className="relative max-w-[600px] w-full h-full">
+    <div className="w-full h-[100dvh] flex justify-center overflow-hidden">
+      <div className="relative max-w-[600px] w-full h-full overflow-hidden">
         <div className="w-full h-full flex flex-col  items-center">
           <div className="flex justify-between items-center w-full px-2">
             <h1 className="text-gray-700 text-2xl py-4 font-extrabold">
